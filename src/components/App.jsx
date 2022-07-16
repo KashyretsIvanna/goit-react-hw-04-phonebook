@@ -17,6 +17,21 @@ class App extends Component {
 		filter: '',
 	};
 
+	componentDidMount(){
+		if(localStorage.getItem('todos')){
+			this.setState({contacts:JSON.parse(localStorage.getItem('todos'))})
+		}
+		
+	}
+
+	componentDidUpdate(prevProps,PrevState){
+		if(this.state.contacts!==PrevState.contacts){
+			console.log("state was updated")
+
+			localStorage.setItem('todos',JSON.stringify(this.state.contacts))
+		}
+	}
+
 	handleSubmit = (name, number) => {
 		let loginInputId = nanoid();
 		this.setState(prevState => ({
